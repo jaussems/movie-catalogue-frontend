@@ -20,7 +20,6 @@ export async function getStaticProps() {
 }
 
 export default function Home({ apiData }: any) {
-  console.log(apiData);
   return (
     <>
       <Head>
