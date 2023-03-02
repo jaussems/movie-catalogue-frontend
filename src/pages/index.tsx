@@ -7,6 +7,8 @@ import NavBar from "@/components/navbar/NavBar";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const dummyMovieList = [];
+
   return (
     <>
       <Head>
@@ -20,7 +22,6 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <NavBar></NavBar>
-        <h1>Testing</h1>
       </main>
     </>
   );
