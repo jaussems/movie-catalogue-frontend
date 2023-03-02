@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { FC } from "react";
 import styles from "../../styles/NavBar.module.scss";
-const NavBar = () => {
+const NavBar: FC = () => {
   return (
     <>
       <nav className={styles.nav}>
