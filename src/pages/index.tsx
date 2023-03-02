@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export async function getStaticProps() {
   const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate&with_genres=12`
+    `${process.env.API_BASE_URL}3/discover/movie?api_key=${process.env.API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate&with_genres=12`
   );
   const apiData = await response.json();
 
@@ -36,13 +36,13 @@ export default function Home({ apiData }: any) {
         <div className={styles.movie_list}>
           {apiData.results.map((movie: any) => {
             return (
-              <>
+              <div key={movie.id}>
                 <MovieCard
                   title={movie.title}
                   imageSource={movie.poster_path}
                   rating={movie.vote_average}
                 ></MovieCard>
-              </>
+              </div>
             );
           })}
         </div>

@@ -5,9 +5,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: 'image.tmdb.org',
+        hostname: process.env.HOST_NAME,
         port: '',
-        pathname: '/t/p/w300/**',
+        pathname: process.env.PATH_NAME,
       },
     ],
   },
