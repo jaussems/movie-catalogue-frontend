@@ -10,10 +10,11 @@ const MovieCard: FC<IMovieCard> = (props) => {
     <div className={styles.movie_card}>
       <h1>{props.title}</h1>
       <Image
+        className={styles.image}
         src={`${baseUrl}` + `${props.imageSource}`}
         alt="Movie poster Image"
         width={200}
-        height={400}
+        height={250}
       />
       <div>
         <p>The rating is {props.rating}</p>
