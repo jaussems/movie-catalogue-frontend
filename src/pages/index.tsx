@@ -1,12 +1,25 @@
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.scss";
 import NavBar from "@/components/navbar/NavBar";
+import MovieCard from "@/components/moviecard/MovieCard";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export async function getStaticProps() {
+  const response = await fetch(
+    `${process.env.API_BASE_URL}3/discover/movie?api_key=${process.env.API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate&with_genres=12`
+  );
+  const apiData = await response.json();
+
+  return {
+    props: {
+      apiData,
+    },
+  };
+}
+
+export default function Home({ apiData }: any) {
   return (
     <>
       <Head>
@@ -20,7 +33,19 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <NavBar></NavBar>
-        <h1>Testing</h1>
+        <div className={styles.movie_list}>
+          {apiData.results.map((movie: any) => {
+            return (
+              <div key={movie.id}>
+                <MovieCard
+                  title={movie.title}
+                  imageSource={movie.poster_path}
+                  rating={movie.vote_average}
+                ></MovieCard>
+              </div>
+            );
+          })}
+        </div>
       </main>
     </>
   );

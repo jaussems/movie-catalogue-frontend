@@ -17,7 +17,12 @@
   z-index: 2;
   font-family: var(--font-mono);
 }
-
+.movie_list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
 .description a {
   display: flex;
   justify-content: center;
