@@ -6,11 +6,14 @@ import MovieCard from "@/components/moviecard/MovieCard";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export async function getStaticProps() {
+const fetchMovieListData = async () => {
   const response = await fetch(
     `${process.env.API_BASE_URL}3/discover/movie?api_key=${process.env.API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate&with_genres=12`
   );
-  const apiData = await response.json();
+  return response.json();
+};
+export async function getStaticProps() {
+  const apiData = await fetchMovieListData();
 
   return {
     props: {
