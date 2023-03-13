@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.scss";
 import NavBar from "@/components/navbar/NavBar";
 import Spinner from "@/components/spinner/Spinner";
+import clsx from "clsx";
+
 import MovieCard from "@/components/moviecard/MovieCard";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -28,9 +30,15 @@ export async function getStaticProps() {
 export default function Home({ apiData }: any) {
   const [isLoading, setIsLoading] = useState(true);
 
+  //testing Animation level,
+  const [activateAnimation, setActivateAnimation] = useState(false);
   setTimeout(() => {
     setIsLoading(false);
   }, 2000);
+
+  setTimeout(() => {
+    setActivateAnimation(true);
+  }, 2500);
 
   return (
     <>
@@ -46,7 +54,13 @@ export default function Home({ apiData }: any) {
       <main className={styles.main}>
         <NavBar></NavBar>
         {!isLoading ? (
-          <div className={styles.movie_list}>
+          <div
+            className={clsx({
+              [styles.movie_list]: true,
+              [styles["movie_list-hidden"]]: !activateAnimation,
+              [styles["movie_list-shown"]]: activateAnimation,
+            })}
+          >
             {apiData.results.map((movie: any) => {
               return (
                 <div key={movie.id}>
